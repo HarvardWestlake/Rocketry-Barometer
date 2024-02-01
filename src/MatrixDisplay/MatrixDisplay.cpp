@@ -63,7 +63,7 @@ String MatrixDisplay::doubleToString(double value, int totalLength, int decimalP
     String fracStr = String(abs(fractionalPart)); // abs() to handle negative values
 
     // Ensure fractional part has correct number of digits (leading zeros if necessary)
-    while (fracStr.length() < decimalPlaces) {
+    while (fracStr.length() < (unsigned int)abs(decimalPlaces)) {
         fracStr = "0" + fracStr;
     }
 
@@ -71,12 +71,12 @@ String MatrixDisplay::doubleToString(double value, int totalLength, int decimalP
     String result = intStr + "." + fracStr;
 
     // Truncate or pad the string to the desired total length
-    if (result.length() < totalLength) {
+    if (result.length() < (unsigned int)abs(totalLength)) {
         // Pad with spaces
-        while (result.length() < totalLength) {
+        while (result.length() < (unsigned int)abs(totalLength)) {
             result = " " + result;
         }
-    } else if (result.length() > totalLength) {
+    } else if (result.length() > (unsigned int)abs(totalLength)) {
         // Truncate
         result = result.substring(0, totalLength);
     }
