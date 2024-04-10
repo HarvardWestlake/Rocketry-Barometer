@@ -20,10 +20,12 @@
 // CS - 15
 // CLK - 16
 
+// 
 
 #include <SPI.h>
 #include <Teensy_BMP180.h>
 #include "MatrixDisplay/MatrixDisplay.h"
+#include "SdCardAddOn/SdCardAddOn.h"
 
 const int buttonPin = 2; // Change to the pin you are using
 int displayState = 0; // 0 for temp, 1 for altitude, 2 for the third state
@@ -47,6 +49,10 @@ void printToTerminal();
 // SETUP * RUNS ONCE BEFORE MAIN LOOP
 // ========================================
 void setup() {
+
+  // Test the SD Card
+  SdCardAddOn sdCardAddOn = SdCardAddOn();
+  sdCardAddOn.loop();
 
   // Setup the push button
   pinMode(buttonPin, INPUT_PULLUP); // Set the button as input with internal pull-up
